@@ -131,8 +131,7 @@ class ChannelOperationFuse(nn.Module):
         
         # 融合特征
         y = self.conv_fuse(torch.cat([x_rgb, x_ir], dim=1)) # [B, C, H, W]
-        
-        # --- 改进点：双路池化 ---
+
         avg_out = self.mlp(F.adaptive_avg_pool2d(y, 1))
         max_out = self.mlp(F.adaptive_max_pool2d(y, 1))
         
